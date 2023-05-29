@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const db = require("./db");
 const app = express();
 app.use(express.json());
 app.use(cors());
@@ -19,6 +20,15 @@ app.post("/send-command", (req, res) => {
   res.status(200).json({ message: "Command received successfully" });
 });
 
+app.get("/get-current-position", (req, res) => {
+  // Query the database
+  let sql = "SELECT * FROM positions";
+  db.query(sql, (err, result) => {
+    if (err) throw err;
+    console.log(result);
+    res.send(result);
+  });
+});
 const port = 8080;
 app.listen(port, () => {
   console.log(`HTTP server is listening on port ${port}`);

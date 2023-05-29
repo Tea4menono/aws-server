@@ -8,16 +8,21 @@ const wsServer = require("./websockets");
 
 app.post("/send-command", (req, res) => {
   const command = req.body.command;
-  console.log(`Received command: ${command}`);
-  console.log(command[0]);
-  if (wsServer.getClient()) {
-    wsServer.getClient().send(JSON.stringify(command));
-    console.log("Command sent to WebSocket client");
-  } else {
-    console.log("No WebSocket client connected");
-  }
+  let sql = `INSERT INTO commands (command) VALUES ('${JSON.stringify(
+    command
+  )}');`;
+  db.query(sql, (err, result) => {
+    if (err) throw err;
 
-  res.status(200).json({ message: "Command received successfully" });
+    if (wsServer.getClient()) {
+      wsServer.getClient().send(JSON.stringify(command));
+      console.log("Command sent to WebSocket client");
+    } else {
+      console.log("No WebSocket client connected");
+    }
+
+    res.status(200).json({ message: "Command received successfully" });
+  });
 });
 
 app.get("/get-current-position", (req, res) => {

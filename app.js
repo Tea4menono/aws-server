@@ -30,7 +30,7 @@ app.get("/get-current-position", (req, res) => {
   let sql = "SELECT * FROM positions ORDER BY id DESC LIMIT 1";
   db.query(sql, (err, result) => {
     if (err) throw err;
-    res.send(result);
+    res.send(result[0]);
   });
 });
 const port = 8080;

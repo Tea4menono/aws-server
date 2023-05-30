@@ -18,9 +18,9 @@ wss.on("connection", (ws) => {
         `Received data: ${data.latitude}${data.longitude}${data.altitude}`
       );
 
-      let sql = `INSERT INTO positions (latitude longitude altitude) VALUES (${String(
+      let sql = `INSERT INTO positions (latitude longitude altitude) VALUES ('${String(
         data.latitude
-      )} ${String(data.longitude)} ${String(data.altitude)});`;
+      )}' '${String(data.longitude)}' '${String(data.altitude)}');`;
       db.query(sql, (err, result) => {
         if (err) throw err;
       });

@@ -27,7 +27,7 @@ app.post("/send-command", (req, res) => {
 
 app.get("/get-current-position", (req, res) => {
   // Query the database
-  let sql = "SELECT * FROM positions";
+  let sql = "SELECT * FROM positions ORDER BY id DESC LIMIT 1";
   db.query(sql, (err, result) => {
     if (err) throw err;
     res.send(result);

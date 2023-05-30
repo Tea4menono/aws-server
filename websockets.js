@@ -1,4 +1,5 @@
 const WebSocket = require("ws");
+const db = require("./db");
 
 let wsClient = null;
 
@@ -9,7 +10,18 @@ wss.on("connection", (ws) => {
   wsClient = ws;
 
   ws.on("message", (message) => {
-    console.log(`Received message: ${message}`);
+    try {
+      // Try to parse the incoming message as JSON
+      const data = JSON.parse(message);
+      // Log the received data
+      console.log(`Received data: ${data}`);
+      let sql = `INSERT INTO positions (latitude longitude altitude) VALUES (${data.lat} ${data.lon} ${data.alt});`;
+      db.query(sql, (err, result) => {
+        if (err) throw err;
+      });
+    } catch (error) {
+      console.log(`Error parsing message: ${message}`);
+    }
   });
 
   ws.on("close", () => {

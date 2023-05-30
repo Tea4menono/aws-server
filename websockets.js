@@ -14,7 +14,10 @@ wss.on("connection", (ws) => {
       // Try to parse the incoming message as JSON
       const data = JSON.parse(message);
       // Log the received data
-      console.log(`Received data: ${data}`);
+      console.log(
+        `Received data: ${data.latitude}${data.longitude}${data.altitude}`
+      );
+
       let sql = `INSERT INTO positions (latitude longitude altitude) VALUES (${String(
         data.latitude
       )} ${String(data.longitude)} ${String(data.altitude)});`;

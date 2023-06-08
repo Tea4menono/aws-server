@@ -19,7 +19,7 @@ wss.on("connection", (ws) => {
         if (err) throw err;
       });
     } catch (error) {
-      console.log(`Error parsing message: ${message}`);
+      console.log(`Error parsing message: ${error}`);
     }
   });
 

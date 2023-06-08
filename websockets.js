@@ -13,8 +13,7 @@ wss.on("connection", (ws) => {
     try {
       // Try to parse the incoming message as JSON
       const data = JSON.parse(message);
-      let sql = `INSERT INTO positions (lat, lon, alt) VALUES (${data.lat}, ${data.lon}, ${data.alt});
-      DELETE FROM positions WHERE id <> (SELECT MAX(id) FROM positions);`;
+      let sql = `UPDATE positions SET lat = ${data.lat}, lon = ${data.lon}, alt = ${data.alt} WHERE id == 1;`;
       db.query(sql, (err, result) => {
         if (err) throw err;
       });

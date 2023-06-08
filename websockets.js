@@ -15,7 +15,7 @@ wss.on("connection", (ws) => {
       const data = JSON.parse(message);
       let sql = `UPDATE positions SET lat = ${data.lat}, lon = ${
         data.lon
-      }, alt = ${data.alt} timestamp = ${new Date()} WHERE id = 1;`;
+      }, alt = ${data.alt} timestamp = ${new Date().getTime()} WHERE id = 1;`;
       db.query(sql, (err, result) => {
         if (err) throw err;
       });

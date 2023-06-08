@@ -16,7 +16,6 @@ wss.on("connection", (ws) => {
       let sql = `UPDATE positions SET lat = ${data.lat}, lon = ${data.lon}, alt = ${data.alt},timestamp = CURRENT_TIMESTAMP WHERE id = 1;`;
       db.query(sql, (err, result) => {
         if (err) throw err;
-        console.log(result);
       });
     } catch (error) {
       console.log(`Error parsing message: ${error}`);

@@ -21,7 +21,6 @@ wss.on("connection", (ws) => {
           });
           break;
         case "log":
-          handleLogData(payload.data);
           break;
         default:
           console.log(`Unknown payload type: ${payload.type}`);

@@ -33,6 +33,7 @@ app.get("/get-current-position", (req, res) => {
     res.send(result[0]);
   });
 });
+
 const port = 8080;
 app.listen(port, () => {
   console.log(`HTTP server is listening on port ${port}`);

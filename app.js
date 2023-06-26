@@ -36,7 +36,7 @@ app.get("/get-current-position", (req, res) => {
 });
 
 app.get("/get-log", (req, res) => {
-  fs.readFile("../log/logfile.log", "utf8", (err, data) => {
+  fs.readFile("../drone-log/logfile.log", "utf8", (err, data) => {
     if (err) {
       return res.sendStatus(500);
     }

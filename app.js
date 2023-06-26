@@ -35,8 +35,17 @@ app.get("/get-current-position", (req, res) => {
   });
 });
 
-app.get("/get-log", (req, res) => {
+app.get("/get-drone-log", (req, res) => {
   fs.readFile("../drone-log/logfile.log", "utf8", (err, data) => {
+    if (err) {
+      return res.sendStatus(500);
+    }
+    res.send(data);
+  });
+});
+
+app.get("/get-aws-log", (req, res) => {
+  fs.readFile("../aws-log/logfile.log", "utf8", (err, data) => {
     if (err) {
       return res.sendStatus(500);
     }

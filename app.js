@@ -34,6 +34,15 @@ app.get("/get-current-position", (req, res) => {
   });
 });
 
+app.get("/get-log", (req, res) => {
+  fs.readFile("../log/logfile.log", "utf8", (err, data) => {
+    if (err) {
+      return res.sendStatus(500);
+    }
+    res.send(data);
+  });
+});
+
 const port = 8080;
 app.listen(port, () => {
   console.log(`HTTP server is listening on port ${port}`);
